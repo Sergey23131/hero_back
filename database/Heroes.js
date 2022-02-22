@@ -16,14 +16,21 @@ const heroSchema = new Schema({
         required: true,
         trim: true
     },
+    superpowers: {
+        type: String,
+        required: true,
+        trim: true
+    },
     catch_phrase: {
         type: String,
         required: true,
         trim: true
     },
-    /*  Images: {
-
-      },*/
+    image: {
+        type: String,
+        required: true,
+        trim: true
+    },
 
 
 }, {timestamps: true, toObject: {virtuals: true}, toJSON: {virtuals: true}});
@@ -32,6 +39,7 @@ heroSchema.statics = {
     createHero(heroObject) {
         return this.create({...heroObject});
     },
+
 };
 
 

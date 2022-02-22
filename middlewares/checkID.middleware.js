@@ -8,7 +8,7 @@ module.exports = {
         try {
             const {hero_id} = req.params;
 
-            const oneHero = await Hero.findById(hero_id).select('');
+            const oneHero = await Hero.findById(hero_id);
 
             if (!oneHero) {
                 throw new ErrorHandler(errors_massage.NOT_FOUND_BY_ID, errors_code.NOT_FOUND);

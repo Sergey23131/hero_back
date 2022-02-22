@@ -1,23 +1,30 @@
 const Hero = require('../database/Heroes');
 
 const {errors_code} = require('../errors');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = {
     getHeroes: async (req, res, next) => {
         try {
-            const allHeroes = await Hero.find().select('-real_name,origin_description,catch_phrase',);
+            const allHeroes = await Hero.find()
+                .select('real_name image');
 
-            res.status(errors_code.UPDATE_DATA).json(allHeroes);
+
+          //  const fileData = await fs.readFile(`./${allHeroes.image.name}`);
+
+            res.status(errors_code.UPDATE_DATA)
+                .json(allHeroes);
         } catch (e) {
             next(e);
         }
     },
 
-    getHeroesById: async (req, res, next) => {
+    getHeroesById: (req, res, next) => {
         try {
-            const oneHero = await Hero.findOne(req.hero);
 
-            res.status(errors_code.UPDATE_DATA).json(oneHero);
+            res.status(errors_code.UPDATE_DATA)
+                .json(req.hero);
         } catch (e) {
             next(e);
         }
@@ -29,7 +36,8 @@ module.exports = {
 
             const hero = await Hero.findById(hero_id);
 
-            res.status(errors_code.UPDATE_DATA).json(hero);
+            res.status(errors_code.UPDATE_DATA)
+                .json(hero);
         } catch (e) {
             next(e);
         }
@@ -38,9 +46,16 @@ module.exports = {
     createHero: async (req, res, next) => {
         try {
 
-            await Hero.createHero(req.body);
+            const myFile = req.files.image;//image(name of field in postman)
 
-            res.status(errors_code.UPDATE_DATA).json('You create new hero!');
+            const filepath = path.join('./upload/' + myFile.name);
+
+            await myFile.mv(filepath);
+
+            await Hero.createHero({...req.body, image: filepath});
+
+            res.status(errors_code.UPDATE_DATA)
+                .json('You create new hero!');
         } catch (e) {
             next(e);
         }
@@ -52,7 +67,8 @@ module.exports = {
 
             await Hero.findByIdAndRemove(hero_id);
 
-            res.status(errors_code.UPDATE_DATA).json('Hero is removed!');
+            res.status(errors_code.UPDATE_DATA)
+                .json('Hero is removed!');
         } catch (e) {
             next(e);
         }

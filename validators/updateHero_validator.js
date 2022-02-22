@@ -5,11 +5,14 @@ const updateHeroValidator = Joi.object({
         .string()
         .trim()
         .required(),
+    superpowers: Joi
+        .string()
+        .trim()
+        .required(),
     catch_phrase: Joi
         .string()
         .trim()
         .required(),
-
 
 });
 
