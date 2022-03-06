@@ -10,7 +10,6 @@ module.exports = {
             const allHeroes = await Hero.find()
                 .select('real_name image');
 
-
           //  const fileData = await fs.readFile(`./${allHeroes.image.name}`);
 
             res.status(errors_code.UPDATE_DATA)
@@ -48,7 +47,7 @@ module.exports = {
 
             const myFile = req.files.image;//image(name of field in postman)
 
-            const filepath = path.join('./upload/' + myFile.name);
+            const filepath = path.join('./upload/'+ req.body.nickname + myFile.name );
 
             await myFile.mv(filepath);
 
