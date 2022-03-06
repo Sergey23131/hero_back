@@ -3,16 +3,15 @@ const Joi = require('joi');
 const updateHeroValidator = Joi.object({
     origin_description: Joi
         .string()
-        .trim()
-        .required(),
+        .trim(),
     superpowers: Joi
         .string()
-        .trim()
-        .required(),
+        .trim(),
     catch_phrase: Joi
         .string()
-        .trim()
-        .required(),
+        .trim(),
+    image:Joi
+        .object()
 
 });
 

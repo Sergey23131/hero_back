@@ -4,4 +4,7 @@ module.exports = {
     NOT_FOUND_BY_ID: 'Hero dosent exist',
     REMOVE_HERO: 'Hero was removed',
     HERO_EXIST: 'Hero in our database',
+    MAX_SIZE: 'File is too big',
+    WRONG_FORMAT: 'Wrong format of file'
+
 };
